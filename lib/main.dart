@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:plany/controllers/bottomnav_controller.dart';
+import 'package:plany/pages/add_todo_page.dart';
+import 'package:plany/pages/history_page.dart';
+import 'package:plany/pages/home_page.dart';
+import 'package:plany/pages/login_page.dart';
+import 'package:plany/pages/profile_page.dart';
+import 'package:plany/pages/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
       ),
-      home: Scaffold(),
+      home: AddTodoPage(),
     );
   }
 }
