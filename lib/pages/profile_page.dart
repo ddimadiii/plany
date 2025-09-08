@@ -6,25 +6,19 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB8A489), // background coklat muda
+      backgroundColor: const Color(0xFFB8A489),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFD1CFB9), // krem
+        title: const Text(
+          "PROFILE",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        centerTitle: false,
+        elevation: 0,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            color: const Color(0xFFD1CFB9), // krem
-            child: const Text(
-              "PROFILE",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF3B3B2F),
-              ),
-            ),
-          ),
-
           const SizedBox(height: 12),
 
           // List Profile

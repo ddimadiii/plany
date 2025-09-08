@@ -19,7 +19,7 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.TOP,
         duration: const Duration(seconds: 2),
       );
-      Get.toNamed('/initial');
+      Get.offAllNamed('/initial');
     } else {
       Get.snackbar(
         "Auth",
