@@ -26,6 +26,8 @@ class LoginPage extends StatelessWidget {
                   label: "Username",
                   obscureText: false,
                   icon: Icons.person,
+
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
                 ),
                 const SizedBox(height: 20),
                 Obx(
@@ -34,6 +36,7 @@ class LoginPage extends StatelessWidget {
                     label: "Password",
                     obscureText: authC.obscurePassword.value,
                     icon: Icons.lock,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
                 Obx(

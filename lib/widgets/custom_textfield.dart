@@ -6,13 +6,14 @@ class CustomTextfield extends StatelessWidget {
   final String label;
   final bool obscureText;
   final IconData icon;
+  final floatingLabelBehavior;
 
   const CustomTextfield({
     super.key,
     required this.txtController,
     required this.label,
     required this.obscureText,
-    required this.icon,
+    required this.icon, this.floatingLabelBehavior,
   });
 
   @override
