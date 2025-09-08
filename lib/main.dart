@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:plany/bindings/todo_binding.dart';
 import 'package:plany/controllers/bottomnav_controller.dart';
 import 'package:plany/pages/add_todo_page.dart';
 import 'package:plany/pages/history_page.dart';

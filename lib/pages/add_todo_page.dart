@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plany/widgets/custom_textfield.dart'; // pastikan path benar
+import 'package:get/get.dart';
+import 'package:plany/widgets/custom_textfield.dart';
+import 'package:plany/controllers/task_controller.dart';
 
 class AddTodoPage extends StatefulWidget {
   const AddTodoPage({super.key});
@@ -9,15 +11,17 @@ class AddTodoPage extends StatefulWidget {
 }
 
 class _AddTodoPageState extends State<AddTodoPage> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  final taskController = Get.find<TaskController>();
+  String? selectedCategory;
 
-  String? selectedCategory; // kategori yang dipilih
+  static const List<String> categories = ['Urgent', 'Normal', 'Low'];
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFBDA789), // coklat background
+      backgroundColor: const Color(0xFFBDA789),
       appBar: AppBar(
         title: const Text(
           "Add To Do",
@@ -26,69 +30,127 @@ class _AddTodoPageState extends State<AddTodoPage> {
         backgroundColor: const Color(0xFFD9D6C1),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
           children: [
-            CustomTextfield(
-              txtController: titleController,
-              label: "Title",
-              obscureText: false,
-              icon: Icons.text_fields,
-            ),
-            const SizedBox(height: 16),
-            CustomTextfield(
-              txtController: descriptionController,
-              label: "Description",
-              obscureText: false,
+            Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480),
+                child: Card(
+                  elevation: 1,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Header
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.playlist_add_check_rounded,
+                              color: cs.primary,
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Tambah Todo',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        const Divider(),
 
-              icon: Icons.text_fields,
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              value: selectedCategory,
-              decoration: InputDecoration(
-                labelText: "Category",
-                labelStyle: const TextStyle(color: Colors.black),
-                filled: true,
-                fillColor: Colors.white, // ✅ background putih
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(
-                    color: Color.fromARGB(244, 23, 44, 63),
+                        // Title
+                        const SizedBox(height: 12),
+                        CustomTextfield(
+                          txtController: taskController.inputTitle,
+                          label: "Title",
+                          obscureText: false,
+                          icon: Icons.text_fields,
+                        ),
+
+                        // Description
+                        const SizedBox(height: 12),
+                        CustomTextfield(
+                          txtController: taskController.inputDesc,
+                          label: "Description",
+                          obscureText: false,
+                          icon: Icons.notes,
+                        ),
+
+                        // Category
+                        const SizedBox(height: 12),
+                        DropdownButtonFormField<String>(
+                          value: selectedCategory,
+                          decoration: InputDecoration(
+                            labelText: "Category",
+                            labelStyle: const TextStyle(color: Colors.black),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(244, 23, 44, 63),
+                              ),
+                            ),
+                          ),
+                          items: categories
+                              .map(
+                                (cat) => DropdownMenuItem(
+                                  value: cat,
+                                  child: Text(cat),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCategory = value;
+                              taskController.selectedCategory.value = value;
+                            });
+                          },
+                        ),
+
+                        // Button
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              taskController.createTask();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(
+                                244,
+                                23,
+                                44,
+                                63,
+                              ),
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text("Add To Do"),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              items: ["Urgent", "Normal", "Low"]
-                  .map((cat) => DropdownMenuItem(value: cat, child: Text(cat)))
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedCategory = value;
-                });
-              },
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                // nanti logic simpan todo disini
-                print("Title: ${titleController.text}");
-                print("Desc: ${descriptionController.text}");
-                print("Category: $selectedCategory");
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(244, 23, 44, 63),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text("Add To Do"),
             ),
           ],
         ),
