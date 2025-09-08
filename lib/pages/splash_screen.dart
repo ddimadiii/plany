@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.offAllNamed('/login');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF79867F), // warna hijau-abu background
+      backgroundColor: const Color(0xFF79867F),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo
-            Image.asset(
-              "assets/images/logo.png", // ganti sesuai path logo kamu
-              height: 120,
-            ),
+            Image.asset("assets/images/logo.png", height: 120),
             const SizedBox(height: 16),
-
-            // Text PLANY
             const Text(
               "PLANY",
               style: TextStyle(

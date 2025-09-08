@@ -14,8 +14,8 @@ class AuthController extends GetxController {
       Get.snackbar(
         "Auth",
         "Login Berhasil",
-        backgroundColor: const Color.fromARGB(200, 17, 148, 208),
-        colorText: Colors.white,
+        backgroundColor: Colors.green[200],
+        colorText: Colors.black,
         snackPosition: SnackPosition.TOP,
         duration: const Duration(seconds: 2),
       );
@@ -25,7 +25,7 @@ class AuthController extends GetxController {
         "Auth",
         "Login Gagal",
         backgroundColor: Colors.red,
-        colorText: Colors.white,
+        colorText: Colors.black,
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2),
       );
