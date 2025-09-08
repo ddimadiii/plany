@@ -16,25 +16,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFBBA588),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFD1CFB9), // krem
+        title: const Text(
+          "YOUR PLANS",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        centerTitle: false,
+        elevation: 0,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
-          Container(
-            width: double.infinity,
-            color: const Color(0xFFEDEDDD),
-            padding: const EdgeInsets.all(16),
-            child: const Text(
-              "YOUR PLANS",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-                color: Colors.black87,
-              ),
-            ),
-          ),
-
           // List todo
           Expanded(
             child: ListView.builder(
@@ -100,16 +93,6 @@ class _HomePageState extends State<HomePage> {
       ),
 
       // Bottom nav (design only)
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: const BoxDecoration(
-          color: Color(0xFFEDEDDD),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
-        ),
-      ),
     );
   }
 }

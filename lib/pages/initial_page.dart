@@ -18,6 +18,7 @@ class InitialPage extends StatelessWidget {
       () => Scaffold(
         body: pages[controller.selectedIndex.value],
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color(0xFFEDEDDD),
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changeTab,
           items: const [

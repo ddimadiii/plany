@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plany/widgets/custom_textfield.dart';
+import 'package:plany/controllers/auth_controller.dart';
 
-// LoginPage
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  bool _obscurePassword = true;
+  final AuthController authC = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF79867F), // abu hijau background
+      backgroundColor: const Color(0xFF79867F),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -26,47 +19,37 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo image
-                Image.asset(
-                  "assets/images/logo.png", // ganti sesuai path logo
-                  height: 120,
-                ),
+                Image.asset("assets/images/logo.png", height: 120),
                 const SizedBox(height: 50),
-
-                // Username
                 CustomTextfield(
-                  txtController: _usernameController,
+                  txtController: authC.username,
                   label: "Username",
                   obscureText: false,
                   icon: Icons.person,
                 ),
                 const SizedBox(height: 20),
-
-                // Password
-                CustomTextfield(
-                  txtController: _passwordController,
-                  label: "Password",
-                  obscureText: _obscurePassword,
-                  icon: Icons.lock,
+                Obx(
+                  () => CustomTextfield(
+                    txtController: authC.password,
+                    label: "Password",
+                    obscureText: authC.obscurePassword.value,
+                    icon: Icons.lock,
+                  ),
                 ),
-
-                // Show password
-                Row(
-                  children: [
-                    Checkbox(
-                      value: !_obscurePassword,
-                      onChanged: (value) {
-                        setState(() {
-                          _obscurePassword = !value!;
-                        });
-                      },
-                    ),
-                    const Text("Show Password"),
-                  ],
+                Obx(
+                  () => Row(
+                    children: [
+                      Checkbox(
+                        value: !authC.obscurePassword.value,
+                        onChanged: (value) {
+                          authC.obscurePassword.value = !value!;
+                        },
+                      ),
+                      const Text("Show Password"),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 20),
-
-                // Login Button
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -78,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      // aksi login
+                      authC.auth();
                     },
                     child: const Text(
                       "Login",
