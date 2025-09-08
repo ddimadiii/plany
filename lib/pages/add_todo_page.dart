@@ -35,12 +35,15 @@ class _AddTodoPageState extends State<AddTodoPage> {
               txtController: titleController,
               label: "Title",
               obscureText: false,
+              icon: Icons.text_fields,
             ),
             const SizedBox(height: 16),
             CustomTextfield(
               txtController: descriptionController,
               label: "Description",
               obscureText: false,
+
+              icon: Icons.text_fields,
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(

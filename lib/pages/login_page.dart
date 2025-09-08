@@ -1,39 +1,5 @@
 import 'package:flutter/material.dart';
-
-// CustomTextfield
-class CustomTextfield extends StatelessWidget {
-  final TextEditingController txtController;
-  final String label;
-  final bool obscureText;
-  final IconData icon;
-
-  const CustomTextfield({
-    super.key,
-    required this.txtController,
-    required this.label,
-    required this.obscureText,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: txtController,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: const Color(0xFFEDEDDD),
-        labelText: label,
-        prefixIcon: Icon(icon, color: Colors.black87),
-        labelStyle: const TextStyle(color: Colors.black),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
-}
+import 'package:plany/widgets/custom_textfield.dart';
 
 // LoginPage
 class LoginPage extends StatefulWidget {
