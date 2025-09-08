@@ -23,17 +23,20 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 50),
                 CustomTextfield(
                   txtController: authC.username,
-                  label: "Username",
+                  hinttext: "Username",
                   obscureText: false,
                   icon: Icons.person,
+
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
                 ),
                 const SizedBox(height: 20),
                 Obx(
                   () => CustomTextfield(
                     txtController: authC.password,
-                    label: "Password",
+                    hinttext: "Password",
                     obscureText: authC.obscurePassword.value,
                     icon: Icons.lock,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
                 Obx(

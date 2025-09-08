@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 // CustomTextfield
 class CustomTextfield extends StatelessWidget {
   final TextEditingController txtController;
-  final String label;
+  final String hinttext;
   final bool obscureText;
   final IconData icon;
+  final floatingLabelBehavior;
 
   const CustomTextfield({
     super.key,
     required this.txtController,
-    required this.label,
+    required this.hinttext,
     required this.obscureText,
-    required this.icon,
+    required this.icon, this.floatingLabelBehavior,
   });
 
   @override
@@ -23,7 +24,7 @@ class CustomTextfield extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xFFEDEDDD),
-        labelText: label,
+        hintText: hinttext,
         prefixIcon: Icon(icon, color: Colors.black87),
         labelStyle: const TextStyle(color: Colors.black),
         border: OutlineInputBorder(

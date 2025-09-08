@@ -73,7 +73,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
                         const SizedBox(height: 12),
                         CustomTextfield(
                           txtController: taskController.inputTitle,
-                          label: "Title",
+                          hinttext: "Title",
                           obscureText: false,
                           icon: Icons.text_fields,
                         ),
@@ -82,7 +82,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
                         const SizedBox(height: 12),
                         CustomTextfield(
                           txtController: taskController.inputDesc,
-                          label: "Description",
+                          hinttext: "Description",
                           obscureText: false,
                           icon: Icons.notes,
                         ),
