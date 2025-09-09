@@ -10,9 +10,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFBBA588),
+      backgroundColor: const Color(0xFF79867F),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFD1CFB9),
+        backgroundColor: const Color(0xFFF1F0E4),
         title: const Text(
           "YOUR PLANS",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 title: todo.todo,
                 category: "Kategori : ${todo.kategori}",
                 description: todo.deskripsi,
-                cardColor: const Color(0xFFEDEDDD),
+                cardColor: const Color(0xFFD1CFB9),
                 done: false,
                 // ubah tombol trailing jadi tombol selesai
                 trailing: IconButton(
