@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plany/routes/routes.dart';
 
 class AuthController extends GetxController {
   final username = TextEditingController();
@@ -19,7 +20,7 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.TOP,
         duration: const Duration(seconds: 2),
       );
-      Get.offAllNamed('/initial');
+      Get.offAllNamed(AppRoutes.initial);
     } else {
       Get.snackbar(
         "Auth",

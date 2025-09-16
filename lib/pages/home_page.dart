@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plany/controllers/task_controller.dart';
 import 'package:plany/widgets/custom_item_tile.dart';
+import 'package:plany/routes/routes.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -29,7 +30,7 @@ class HomePage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.black54,
+                color: Colors.white,
               ),
             ),
           );
@@ -67,7 +68,7 @@ class HomePage extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFFEDEDDD),
-        onPressed: () => Get.toNamed('/addtodo'),
+        onPressed: () => Get.toNamed(AppRoutes.addTodo),
         child: const Icon(Icons.add, color: Colors.black87),
       ),
     );

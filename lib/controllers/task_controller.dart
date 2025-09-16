@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plany/models/model_todo.dart';
-
+import 'package:plany/routes/routes.dart';
 class TaskController extends GetxController {
   // textfield controller
   final inputTitle = TextEditingController();
@@ -27,7 +27,7 @@ class TaskController extends GetxController {
       inputDesc.clear();
       selectedCategory.value = null;
 
-      Get.offNamed('/initial');
+      Get.offNamed(AppRoutes.initial);
     } else {
       _showMessage("Task gagal ditambahkan", Colors.redAccent);
     }
