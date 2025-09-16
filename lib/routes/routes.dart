@@ -20,8 +20,16 @@ class AppRoutes {
 
 class AppPages {
   static final pages = [
-    GetPage(name: AppRoutes.splash, page: () => SplashScreen()),
-    GetPage(name: AppRoutes.initial, page: () => InitialPage()),
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => SplashScreen(),
+      binding: TodoBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.initial,
+      page: () => InitialPage(),
+      binding: TodoBinding(), // tambahkan ini
+    ),
     GetPage(name: AppRoutes.login, page: () => LoginPage()),
     GetPage(
       name: AppRoutes.home,

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plany/widgets/custom_textfield.dart';
 import 'package:plany/controllers/auth_controller.dart';
-import 'package:plany/routes/routes.dart';
+
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-
-  final AuthController authC = Get.put(AuthController());
+  final AuthController authC = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
