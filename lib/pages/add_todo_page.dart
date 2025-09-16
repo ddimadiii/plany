@@ -21,13 +21,13 @@ class _AddTodoPageState extends State<AddTodoPage> {
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFBDA789),
+      backgroundColor: const Color(0xFF79867F),
       appBar: AppBar(
         title: const Text(
           "Add To Do",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        backgroundColor: const Color(0xFFD9D6C1),
+        backgroundColor: const Color(0xFFF1F0E4),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -102,7 +102,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                               borderSide: const BorderSide(
-                                color: Color.fromARGB(244, 23, 44, 63),
+                                color: Color(0xFFBBA588),
                               ),
                             ),
                           ),
@@ -131,12 +131,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
                               taskController.createTask();
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(
-                                244,
-                                23,
-                                44,
-                                63,
-                              ),
+                              backgroundColor: const Color(0xFFBBA588),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(

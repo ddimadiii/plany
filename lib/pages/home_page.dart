@@ -32,11 +32,14 @@ class HomePage extends StatelessWidget {
                 title: todo.todo,
                 category: "Kategori : ${todo.kategori}",
                 description: todo.deskripsi,
-                cardColor: const Color(0xFFD1CFB9),
+                cardColor: const Color(0xFFF1F0E4),
                 done: false,
                 // ubah tombol trailing jadi tombol selesai
                 trailing: IconButton(
-                  icon: const Icon(Icons.check_circle, color: Colors.green),
+                  icon: const Icon(
+                    Icons.check_box_outline_blank,
+                    color: Color.fromARGB(255, 134, 180, 151),
+                  ),
                   onPressed: () => todoCtrl.completeTask(index),
                   tooltip: "Tandai Selesai",
                 ),
