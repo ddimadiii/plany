@@ -9,6 +9,7 @@ import 'package:plany/pages/login_page.dart';
 import 'package:plany/pages/profile_page.dart';
 import 'package:plany/pages/splash_screen.dart';
 import 'package:plany/routes/pages.dart';
+import 'package:plany/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
       ),
-      initialRoute: '/',
-      getPages: Pages.pages,
+      initialRoute: AppRoutes.splash,
+      getPages: AppPages.pages,
     );
   }
 }
