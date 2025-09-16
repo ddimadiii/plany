@@ -11,9 +11,9 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB8A489), // coklat muda
+      backgroundColor: const Color(0xFF79867F),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFD1CFB9), // krem
+        backgroundColor: const Color(0xFFF1F0E4),
         title: const Text(
           "HISTORY",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
@@ -42,7 +42,7 @@ class HistoryPage extends StatelessWidget {
                 title: doneTodo.todo,
                 category: "Kategori : ${doneTodo.kategori}",
                 description: doneTodo.deskripsi,
-                cardColor: const Color(0xFFD1CFB9), // krem
+                cardColor: const Color(0xFFF1F0E4), // krem
                 done: true, // kasih status selesai
                 trailing: IconButton(
                   icon: const Icon(Icons.delete, color: Colors.redAccent),
