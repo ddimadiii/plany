@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:plany/controllers/auth_controller.dart';
 import 'package:plany/routes/routes.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
-
-  Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    Get.offAllNamed(AppRoutes.splash); // balik ke splash/login
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +31,12 @@ class ProfilePage extends StatelessWidget {
               children: const [
                 ProfileCard(
                   name: "Jumadi",
-                  age: 18,
+                  absen: 18,
                   imagePath: "assets/images/logo.png",
                 ),
                 ProfileCard(
                   name: "Keiko Shafira Wiyana",
-                  age: 19,
+                  absen: 19,
                   imagePath: "assets/images/profilekeiko.jpg",
                 ),
               ],
@@ -55,7 +49,10 @@ class ProfilePage extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: logout,
+                onPressed: () {
+                  // Panggil method logout dari AuthController
+                  Get.find<AuthController>().logout();
+                },
                 icon: const Icon(Icons.logout, color: Colors.white),
                 label: const Text(
                   "Logout",
@@ -82,13 +79,13 @@ class ProfilePage extends StatelessWidget {
 
 class ProfileCard extends StatelessWidget {
   final String name;
-  final int age;
+  final int absen;
   final String imagePath;
 
   const ProfileCard({
     super.key,
     required this.name,
-    required this.age,
+    required this.absen,
     required this.imagePath,
   });
 
@@ -114,7 +111,7 @@ class ProfileCard extends StatelessWidget {
             name,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          Text("$age", style: const TextStyle(fontSize: 16)),
+          Text("$absen", style: const TextStyle(fontSize: 16)),
         ],
       ),
     );

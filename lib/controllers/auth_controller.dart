@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:plany/routes/routes.dart';
 
 class AuthController extends GetxController {
@@ -33,5 +34,11 @@ class AuthController extends GetxController {
     }
     username.clear();
     password.clear();
+  }
+
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Get.offAllNamed(AppRoutes.splash); // balik ke splash/login
   }
 }
