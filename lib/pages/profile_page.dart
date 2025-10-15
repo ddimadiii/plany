@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plany/controllers/auth_controller.dart';
-import 'package:plany/routes/routes.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
