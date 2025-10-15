@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:plany/bindings/bindings.dart';
+import 'package:plany/bindings/splash_binding.dart';
 import '../bindings/todo_binding.dart';
 import '../pages/add_todo_page.dart';
 import '../pages/history_page.dart';
@@ -23,29 +25,29 @@ class AppPages {
     GetPage(
       name: AppRoutes.splash,
       page: () => SplashScreen(),
-      binding: TodoBinding(),
+      binding: Binding(),
     ),
     GetPage(
       name: AppRoutes.initial,
       page: () => InitialPage(),
-      binding: TodoBinding(), // tambahkan ini
+      binding: Binding(), // tambahkan ini
     ),
     GetPage(name: AppRoutes.login, page: () => LoginPage()),
-    GetPage(
-      name: AppRoutes.home,
-      page: () => HomePage(),
-      binding: TodoBinding(),
-    ),
+    GetPage(name: AppRoutes.home, page: () => HomePage(), binding: Binding()),
     GetPage(
       name: AppRoutes.addTodo,
       page: () => AddTodoPage(),
-      binding: TodoBinding(),
+      binding: Binding(),
     ),
     GetPage(
       name: AppRoutes.history,
       page: () => HistoryPage(),
-      binding: TodoBinding(),
+      binding: Binding(),
     ),
-    GetPage(name: AppRoutes.profile, page: () => ProfilePage()),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => ProfilePage(),
+      binding: Binding(),
+    ),
   ];
 }
