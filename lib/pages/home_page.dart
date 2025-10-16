@@ -24,7 +24,6 @@ class HomePage extends StatelessWidget {
       ),
       body: Obx(() {
         if (todoCtrl.activeTasks.isEmpty) {
-          // kalau belum ada task
           return const Center(
             child: Text(
               "Belum ada task",
@@ -36,7 +35,6 @@ class HomePage extends StatelessWidget {
             ),
           );
         } else {
-          // kalau ada task → tampilkan list
           return ListView.builder(
             itemCount: todoCtrl.activeTasks.length,
             itemBuilder: (context, index) {
@@ -53,12 +51,18 @@ class HomePage extends StatelessWidget {
                   description: todo.deskripsi,
                   done: todo.status,
                   cardColor: const Color(0xFFF1F0E4),
-                  onCheck: () => todoCtrl.completeTask(index),
+
+                  onCheck: () => _showEditDialog(context, todo, index),
+
                   onLongPress: () =>
                       _showTaskOptionsDialog(context, todo, index),
+
                   trailing: IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blueGrey),
-                    onPressed: () => _showEditDialog(context, todo, index),
+                    icon: Icon(
+                      todo.status ? Icons.undo : Icons.check_circle_outline,
+                      color: todo.status ? Colors.orange : Colors.green,
+                    ),
+                    onPressed: () => _showStatusDialog(context, todo),
                   ),
                 ),
               );
@@ -78,6 +82,7 @@ class HomePage extends StatelessWidget {
     final titleCtrl = TextEditingController(text: todo.todo);
     final descCtrl = TextEditingController(text: todo.deskripsi);
     final catCtrl = TextEditingController(text: todo.kategori);
+
     showDialog(
       context: context,
       builder: (context) {
@@ -171,20 +176,16 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              // 🟩 Edit
               ListTile(
-                leading: Icon(
-                  todo.status ? Icons.undo : Icons.check_circle_outline,
-                ),
-                title: Text(
-                  todo.status
-                      ? 'Tandai sebagai belum selesai'
-                      : 'Tandai sebagai selesai',
-                ),
+                leading: const Icon(Icons.edit, color: Colors.blueGrey),
+                title: const Text('Edit'),
                 onTap: () {
                   Navigator.of(context).pop();
-                  _showStatusDialog(context, todo);
+                  _showEditDialog(context, todo, index);
                 },
               ),
+              // 🟥 Hapus
               ListTile(
                 leading: const Icon(Icons.delete, color: Colors.red),
                 title: const Text('Hapus', style: TextStyle(color: Colors.red)),

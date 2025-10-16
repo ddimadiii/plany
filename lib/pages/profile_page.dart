@@ -50,7 +50,7 @@ class ProfilePage extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () {
                   // Panggil method logout dari AuthController
-                  Get.find<AuthController>().logout();
+                  Get.find<AuthController>().logout(context);
                 },
                 icon: const Icon(Icons.logout, color: Colors.white),
                 label: const Text(

@@ -36,9 +36,29 @@ class AuthController extends GetxController {
     password.clear();
   }
 
-  Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    Get.offAllNamed(AppRoutes.splash); // balik ke splash/login
+  Future<void> logout(BuildContext context) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Konfirmasi"),
+        content: const Text("Yakin ingin logout?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text("Batal"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text("Logout"),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+      Get.offAllNamed(AppRoutes.splash);
+    }
   }
 }
