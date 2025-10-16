@@ -11,7 +11,7 @@ class AuthController extends GetxController {
     String usernameToString = username.text.trim();
     String passwordToString = password.text.trim();
 
-    if (usernameToString == "madi" && passwordToString == "keiko") {
+    if (usernameToString == "madi" && passwordToString == "123") {
       Get.snackbar(
         "Auth",
         "Login Berhasil",

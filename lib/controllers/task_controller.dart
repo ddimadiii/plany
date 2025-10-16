@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plany/models/model_todo.dart';
 import 'package:plany/routes/routes.dart';
+
 class TaskController extends GetxController {
   // textfield controller
   final inputTitle = TextEditingController();
@@ -12,6 +13,7 @@ class TaskController extends GetxController {
   var activeTasks = <ModelTodo>[].obs;
   var completedTasks = <ModelTodo>[].obs;
 
+  static const List<String> categories = ['Urgent', 'Normal', 'Low'];
   // tambah todo
   void createTask() {
     final title = inputTitle.text.trim();
@@ -44,8 +46,28 @@ class TaskController extends GetxController {
 
   // hapus dari history
   void deleteHistory(int index) {
-    completedTasks.removeAt(index);
-    _showMessage("Riwayat task dihapus", Colors.orangeAccent);
+    Get.dialog(
+      AlertDialog(
+        title: const Text("Hapus Riwayat?"),
+        content: const Text("Apakah kamu yakin ingin menghapus task ini?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // tutup dialog
+            },
+            child: const Text("Tidak"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.offAllNamed(AppRoutes.history); // tutup dialog dulu
+              deleteHistory(index); // lalu hapus data
+            },
+            child: const Text("Ya"),
+          ),
+        ],
+      ),
+      barrierDismissible: false, // biar ga ketutup kalau klik di luar
+    );
   }
 
   // hapus dari todo aktif

@@ -3,21 +3,12 @@ import 'package:get/get.dart';
 import 'package:plany/widgets/custom_textfield.dart';
 import 'package:plany/controllers/task_controller.dart';
 
-class AddTodoPage extends StatefulWidget {
+class AddTodoPage extends StatelessWidget {
   const AddTodoPage({super.key});
 
   @override
-  State<AddTodoPage> createState() => _AddTodoPageState();
-}
-
-class _AddTodoPageState extends State<AddTodoPage> {
-  final taskController = Get.find<TaskController>();
-  String? selectedCategory;
-
-  static const List<String> categories = ['Urgent', 'Normal', 'Low'];
-
-  @override
   Widget build(BuildContext context) {
+    final taskController = Get.find<TaskController>();
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -89,37 +80,36 @@ class _AddTodoPageState extends State<AddTodoPage> {
 
                         // Category
                         const SizedBox(height: 12),
-                        DropdownButtonFormField<String>(
-                          value: selectedCategory,
-                          decoration: InputDecoration(
-                            labelText: "Category",
-                            labelStyle: const TextStyle(color: Colors.black),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(
-                                color: Color(0xFFBBA588),
+                        Obx(
+                          () => DropdownButtonFormField<String>(
+                            value: taskController.selectedCategory.value,
+                            decoration: InputDecoration(
+                              labelText: "Category",
+                              labelStyle: const TextStyle(color: Colors.black),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFBBA588),
+                                ),
                               ),
                             ),
-                          ),
-                          items: categories
-                              .map(
-                                (cat) => DropdownMenuItem(
-                                  value: cat,
-                                  child: Text(cat),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              selectedCategory = value;
+                            items: TaskController.categories
+                                .map(
+                                  (cat) => DropdownMenuItem(
+                                    value: cat,
+                                    child: Text(cat),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {
                               taskController.selectedCategory.value = value;
-                            });
-                          },
+                            },
+                          ),
                         ),
 
                         // Button

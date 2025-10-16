@@ -1,59 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plany/controllers/responsif_controller.dart';
 import 'package:plany/controllers/task_controller.dart';
+import 'package:plany/pages/mobileview/mobile_history_page.dart';
+import 'package:plany/pages/wideview/wide_history_page.dart';
 import 'package:plany/widgets/custom_item_tile.dart';
 
 class HistoryPage extends StatelessWidget {
   HistoryPage({super.key});
-
-  final todoCtrl = Get.find<TaskController>();
-
+  final controller = Get.find<ResponsifController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF79867F),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF1F0E4),
-        title: const Text(
-          "HISTORY",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        centerTitle: false,
-        elevation: 0,
-      ),
-      body: Obx(() {
-        if (todoCtrl.completedTasks.isEmpty) {
-          return const Center(
-            child: Text(
-              "Belum ada task selesai",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          controller.updateScreen(constraints);
+
+          return Obx(
+            () => controller.isMobile.value
+                ? MobileHistoryPage()
+                : WideHistoryPage()
           );
-        }
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: todoCtrl.completedTasks.length,
-          itemBuilder: (context, index) {
-            final doneTodo = todoCtrl.completedTasks[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              child: CardItemTile(
-                leadingText: (index + 1).toString(),
-                title: doneTodo.todo,
-                category: "Kategori : ${doneTodo.kategori}",
-                description: doneTodo.deskripsi,
-                cardColor: const Color(0xFFF1F0E4), // krem
-                done: true, // kasih status selesai
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.redAccent),
-                  onPressed: () => todoCtrl.deleteHistory(index),
-                  tooltip: "Hapus dari History",
-                ),
-              ),
-            );
-          },
-        );
-      }),
+        },
+      ),
     );
   }
 }
