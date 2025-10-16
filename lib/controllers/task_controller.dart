@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plany/database_helper.dart';
 import 'package:plany/models/model_todo.dart';
 import 'package:plany/routes/routes.dart';
+
 class TaskController extends GetxController {
   // textfield controller
   final inputTitle = TextEditingController();
@@ -12,16 +14,30 @@ class TaskController extends GetxController {
   var activeTasks = <ModelTodo>[].obs;
   var completedTasks = <ModelTodo>[].obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchTasks();
+  }
+
+  Future<void> fetchTasks() async {
+    final active = await DBHelper().getTodos(completed: false);
+    final completed = await DBHelper().getTodos(completed: true);
+    activeTasks.assignAll(active);
+    completedTasks.assignAll(completed);
+  }
+
   // tambah todo
-  void createTask() {
+  Future<void> createTask() async {
     final title = inputTitle.text.trim();
     final desc = inputDesc.text.trim();
     final cat = selectedCategory.value;
 
     if (title.isNotEmpty && cat != null) {
-      activeTasks.add(ModelTodo(title, desc, cat));
+      final todo = ModelTodo(title, desc, cat);
+      await DBHelper().insertTodo(todo);
+      await fetchTasks();
       _showMessage("Task berhasil dibuat", Colors.green.shade700);
-
       // reset field
       inputTitle.clear();
       inputDesc.clear();
@@ -34,24 +50,46 @@ class TaskController extends GetxController {
   }
 
   // tandai selesai
-  void completeTask(int index) {
+  Future<void> completeTask(int index) async {
     final item = activeTasks[index];
     item.status = true;
-    activeTasks.removeAt(index);
-    completedTasks.add(item);
+    await DBHelper().updateTodo(item);
+    await fetchTasks();
     _showMessage("Task selesai 🎉", Colors.teal);
   }
 
   // hapus dari history
-  void deleteHistory(int index) {
-    completedTasks.removeAt(index);
+  Future<void> deleteHistory(int index) async {
+    final item = completedTasks[index];
+    await DBHelper().deleteTodo(item.id!);
+    await fetchTasks();
     _showMessage("Riwayat task dihapus", Colors.orangeAccent);
   }
 
   // hapus dari todo aktif
-  void deleteTask(int index) {
-    activeTasks.removeAt(index);
+  Future<void> deleteTask(int index) async {
+    final item = activeTasks[index];
+    await DBHelper().deleteTodo(item.id!);
+    await fetchTasks();
     _showMessage("Task dihapus", Colors.orangeAccent);
+  }
+
+  // update task
+  Future<void> updateTask(ModelTodo updated) async {
+    await DBHelper().updateTodo(updated);
+    await fetchTasks();
+    _showMessage("Task berhasil diupdate", Colors.blueAccent);
+  }
+
+  // toggle status selesai/belum selesai
+  Future<void> toggleTaskStatus(ModelTodo todo) async {
+    todo.status = !todo.status;
+    await DBHelper().updateTodo(todo);
+    await fetchTasks();
+    _showMessage(
+      todo.status ? "Task selesai 🎉" : "Task dipindahkan ke aktif",
+      todo.status ? Colors.teal : Colors.blueGrey,
+    );
   }
 
   // util snackbar

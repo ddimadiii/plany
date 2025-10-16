@@ -8,8 +8,9 @@ class CardItemTile extends StatelessWidget {
   final bool done;
   final VoidCallback? onCheck;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
   final Color? cardColor;
-  final Widget? trailing; 
+  final Widget? trailing;
   const CardItemTile({
     super.key,
     required this.leadingText,
@@ -19,8 +20,9 @@ class CardItemTile extends StatelessWidget {
     this.done = false,
     this.onCheck,
     this.onTap,
+    this.onLongPress,
     this.cardColor,
-    this.trailing, 
+    this.trailing,
   });
 
   @override
@@ -36,6 +38,7 @@ class CardItemTile extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onTap,
+        onLongPress: onLongPress,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         leading: Text(
@@ -53,12 +56,12 @@ class CardItemTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (description != null && description!.isNotEmpty)
-              Text(description!,
-                  maxLines: 2, overflow: TextOverflow.ellipsis),
+              Text(description!, maxLines: 2, overflow: TextOverflow.ellipsis),
             Text(category),
           ],
         ),
-        trailing: trailing ?? 
+        trailing:
+            trailing ??
             IconButton(
               onPressed: onCheck,
               icon: Icon(

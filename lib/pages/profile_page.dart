@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plany/controllers/auth_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -21,14 +23,51 @@ class ProfilePage extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
 
-          // List Profile
+          // Profile
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(12),
               children: const [
-                ProfileCard(name: "Jumadi", age: 18),
-                ProfileCard(name: "Keiko Shafira Wiyana", age: 19),
+                ProfileCard(
+                  name: "Jumadi",
+                  absen: 18,
+                  imagePath: "assets/images/logo.png",
+                ),
+                ProfileCard(
+                  name: "Keiko Shafira Wiyana",
+                  absen: 19,
+                  imagePath: "assets/images/profilekeiko.jpg",
+                ),
               ],
+            ),
+          ),
+
+          // Logout
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Panggil method logout dari AuthController
+                  Get.find<AuthController>().logout();
+                },
+                icon: const Icon(Icons.logout, color: Colors.white),
+                label: const Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red[700],
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
@@ -39,9 +78,15 @@ class ProfilePage extends StatelessWidget {
 
 class ProfileCard extends StatelessWidget {
   final String name;
-  final int age;
+  final int absen;
+  final String imagePath;
 
-  const ProfileCard({super.key, required this.name, required this.age});
+  const ProfileCard({
+    super.key,
+    required this.name,
+    required this.absen,
+    required this.imagePath,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +94,23 @@ class ProfileCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFEDECDD), // putih krem
+        color: const Color(0xFFEDECDD),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 40,
-            backgroundColor: Color(0xFFD9D9D9), // abu muda
-            child: Icon(Icons.person, size: 50, color: Color(0xFF3B3B2F)),
+            backgroundImage: AssetImage(imagePath),
+            backgroundColor: const Color(0xFFD9D9D9),
           ),
           const SizedBox(height: 12),
           Text(
             name,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          Text("$age", style: const TextStyle(fontSize: 16)),
+          Text("$absen", style: const TextStyle(fontSize: 16)),
         ],
       ),
     );
