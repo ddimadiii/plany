@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:plany/bindings/bindings.dart';
+import 'package:plany/bindings/splash_binding.dart';
+import '../bindings/todo_binding.dart';
 import '../pages/add_todo_page.dart';
 import '../pages/history_page.dart';
 import '../pages/home_page.dart';
@@ -8,6 +10,7 @@ import '../pages/login_page.dart';
 import '../pages/profile_page.dart';
 import '../pages/splash_screen.dart';
 
+// routes.dart
 class AppRoutes {
   static const splash = '/splash';
   static const initial = '/initial';
