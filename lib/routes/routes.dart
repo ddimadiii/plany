@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:plany/bindings/bindings.dart';
-import 'package:plany/bindings/splash_binding.dart';
-import '../bindings/todo_binding.dart';
 import '../pages/add_todo_page.dart';
 import '../pages/history_page.dart';
 import '../pages/home_page.dart';
